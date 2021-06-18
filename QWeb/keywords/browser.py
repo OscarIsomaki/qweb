@@ -147,7 +147,7 @@ def open_browser(url, browser_alias, options=None, **kwargs):
             driver = bs_mobile.open_browser(bs_device, bs_project_name, bs_run_id)
         else:
             raise exceptions.QWebException('Unknown browserstack browser {}'.format(browser_alias))
-    if provider == 'kobiton':
+    elif provider == 'kobiton':
         kobiton_device = BuiltIn().get_variable_value('${DEVICE}')
         kobiton_os = BuiltIn().get_variable_value('${OS}')
         kobiton_os_version = BuiltIn().get_variable_value('${OSVERSION}')
