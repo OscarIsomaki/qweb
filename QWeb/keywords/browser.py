@@ -24,7 +24,7 @@ from QWeb.keywords import window
 from QWeb.internal import browser, xhr, exceptions, util
 from QWeb.internal.config_defaults import CONFIG
 from QWeb.internal.browser import chrome, firefox, ie, android, bs_mobile,\
-                                  bs_desktop, safari, edge
+                                  bs_desktop, safari, edge, kobiton
 
 
 def return_browser():
@@ -147,6 +147,11 @@ def open_browser(url, browser_alias, options=None, **kwargs):
             driver = bs_mobile.open_browser(bs_device, bs_project_name, bs_run_id)
         else:
             raise exceptions.QWebException('Unknown browserstack browser {}'.format(browser_alias))
+    elif provider == 'kobiton':
+        kobiton_device = BuiltIn().get_variable_value('${DEVICE}')
+        kobiton_os = BuiltIn().get_variable_value('${OS}')
+        kobiton_os_version = BuiltIn().get_variable_value('${OSVERSION}')
+        driver = kobiton.open_browser(browser_alias, kobiton_device, kobiton_os, kobiton_os_version)
     else:
         driver = _browser_checker(b_lower, options, **kwargs)
     util.initial_logging(driver.capabilities)
