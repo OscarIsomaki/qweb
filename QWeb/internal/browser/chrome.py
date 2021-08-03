@@ -91,6 +91,7 @@ def open_browser(executable_path="chromedriver", chrome_args=None,
                 options.add_argument(item.lstrip())
         # options.add_argument("start-maximized")
         options.add_argument("--disable-notifications")
+        options.add_argument("--no-sandbox")
         if 'headless' in kwargs:
             CONFIG.set_value('Headless', True)
             options.add_argument("headless")
